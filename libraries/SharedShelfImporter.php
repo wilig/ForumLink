@@ -121,10 +121,10 @@ class SharedShelfImporter
 
     private function _makeRecord($data, $files)
     {
-        $collection = $this->_findCollection($data['_collection_id']);
-        $itemMetadata = array('collection_id' => $collection->id,
+        //$collection = $this->_findCollection($data['_collection_id']);
+        $itemMetadata = array('collection_id' => $data['_collection_id'], // $collection->id,
             'public'        => true,
-            'featured'      => false);
+            'featured'      => true);
 
         $fileMetadata = array();
         $elementTexts = array();
@@ -145,7 +145,7 @@ class SharedShelfImporter
             $fileMetadata['file_transfer_type'] = 'Upload';
             $fileMetadata['files'] = '_image_file';
         }
-        release_object($collection);
+        //release_object($collection);
         return array('itemMetadata' => $itemMetadata,
             'elementTexts' => $elementTexts,
             'fileMetadata' => $fileMetadata);
