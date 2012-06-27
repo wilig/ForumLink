@@ -123,7 +123,6 @@ class SharedShelfImporter
     {
         //$collection = $this->_findCollection($data['_collection_id']);
         error_log('_makeRecord called');
-        error_log($data);
         error_log($data['_collection_id']);
         $itemMetadata = array('collection_id' => (int)$data['_collection_id'], // $collection->id,
             'public'        => true,
