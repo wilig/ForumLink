@@ -129,7 +129,8 @@ class SharedShelfImporter
         error_log('done');
         $itemMetadata = array('collection_id' => $collection_id,
             'public'        => true,
-            'featured'      => false);
+            'featured'      => false,
+            'item_type-id'  => 6);
 
         $fileMetadata = array();
         $elementTexts = array();
