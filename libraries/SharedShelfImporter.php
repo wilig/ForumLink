@@ -18,7 +18,7 @@ class SharedShelfImporter
     public function createOrUpdateItem($data, $files)
     {
         $json = Zend_Json::decode($data['data']);
-        $record = $this->_makeRecord($json, $files);
+        $record = $this->_makeRecord($data['_collection_id'], $json, $files);
         $timestamp = date_parse($data['_publication_date']);
         if(($item = $this->_findLinkedItem($data['_ss_id']))) {
             $id = $item->id;
@@ -119,13 +119,13 @@ class SharedShelfImporter
     }
 
 
-    private function _makeRecord($data, $files)
+    private function _makeRecord($collection_id, $data, $files)
     {
-        //$collection = $this->_findCollection($data['_collection_id']);
+        $collection = $this->_findCollection($collection_id);
         error_log('_makeRecord called');
         error_log(Zend_Json::encode($data));
-        error_log($data['_collection_id']);
-        $itemMetadata = array('collection_id' => (int)$data['_collection_id'], // $collection->id,
+        error_log($collection_id);
+        $itemMetadata = array('collection_id' => $collection->id,
             'public'        => true,
             'featured'      => false);
 
