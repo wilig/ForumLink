@@ -125,6 +125,8 @@ class SharedShelfImporter
         error_log('_makeRecord called');
         error_log(Zend_Json::encode($data));
         error_log($collection_id);
+        error_log($collection->id);
+        error_log('done');
         $itemMetadata = array('collection_id' => $collection->id,
             'public'        => true,
             'featured'      => false);
