@@ -27,7 +27,7 @@ class SharedShelfImporter
             $this->_updatePublicationDate($data['_ss_id'], $timestamp);
         } else {
             $item = $this->insertItem($record['itemMetadata'], $record['elementTexts'], $record['fileMetadata']);
-            $this->_recordPublication($data['_ss_id'], $item->id, $timestamp);
+            $this->_recordPublication($data['_ss_id'], $data['_collection_id'], $item->id, $timestamp);
         }
         release_object($item);
         release_object($record);
@@ -92,13 +92,14 @@ class SharedShelfImporter
         return $item;
     }
 
-    private function _recordPublication($ss_id, $item_id, $timestamp)
+    private function _recordPublication($ss_id, $collection_id, $item_id, $timestamp)
     {
         $record = new SharedShelfTransferRecord;
 
-        $record->ss_id      = $ss_id;
-        $record->item_id    = $item_id;
-        $record->published  = (string) $timestamp;
+        $record->ss_id         = $ss_id;
+        $record->collection_id = $collection_id;
+        $record->item_id       = $item_id;
+        $record->published     = (string) $timestamp;
         $record->save();
 
         release_object($record);

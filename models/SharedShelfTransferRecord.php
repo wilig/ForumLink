@@ -16,6 +16,7 @@ class SharedShelfTransferRecord extends Omeka_Record
 {
     public $id;
     public $ss_id;
+    public $collection_id;
     public $item_id;
     public $published;
 }
