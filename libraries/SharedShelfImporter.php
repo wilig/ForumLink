@@ -122,9 +122,10 @@ class SharedShelfImporter
     private function _makeRecord($data, $files)
     {
         //$collection = $this->_findCollection($data['_collection_id']);
-        $itemMetadata = array('collection_id' => $data['_collection_id'], // $collection->id,
+        echo($data['_collection_id']);
+        $itemMetadata = array('collection_id' => (int)$data['_collection_id'], // $collection->id,
             'public'        => true,
-            'featured'      => true);
+            'featured'      => false);
 
         $fileMetadata = array();
         $elementTexts = array();
