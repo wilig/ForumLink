@@ -20,11 +20,11 @@ class SharedShelfTransferRecordTable extends Omeka_Db_Table
      * @param int $harvsetId
      * @return array An array of OaipmhHarvesterRecord objects.
      */
-    public function findBySharedShelfId($ss_id)
+    public function findBySharedShelfIdAndCollectionId($ss_id, $collection_id)
     {
         $select = $this->getSelect();
-        $select->where('ss_id = ?');
-        return $this->fetchObject($select, array($ss_id));
+        $select->where('ss_id = ? AND collection_id = ?');
+        return $this->fetchObject($select, array($ss_id, $collection_id));
     }
 
     public function findByItemId($item_id)
@@ -38,6 +38,5 @@ class SharedShelfTransferRecordTable extends Omeka_Db_Table
     {
         $select = $this->getSelect()->order('id');
         return $this->fetchObjects($select);
-
     }
 }

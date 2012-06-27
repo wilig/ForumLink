@@ -48,6 +48,7 @@ function shared_shelf_link_install()
     CREATE TABLE IF NOT EXISTS `{$db->prefix}shared_shelf_transfer_records` (
         `id` int(10) unsigned NOT NULL auto_increment,
         `ss_id` int(10) unsigned NOT NULL,
+        `collection_id` int(10) unsigned NOT NULL,
         `item_id` int(10) unsigned default NULL,
         `published` datetime default NULL,
         PRIMARY KEY  (`id`)

@@ -20,7 +20,7 @@ class SharedShelfImporter
         $json = Zend_Json::decode($data['data']);
         $record = $this->_makeRecord($data['_collection_id'], $json, $files);
         $timestamp = date_parse($data['_publication_date']);
-        if(($item = $this->_findLinkedItem($data['_ss_id']))) {
+        if(($item = $this->_findLinkedItem($data['_ss_id'], $data['_collection_id']))) {
             $id = $item->id;
             release_object($item); // Not sure if this is required.  Possible resource leak if not called.
             $item = $this->_updateItem($id, $record['elementTexts']);
@@ -34,9 +34,9 @@ class SharedShelfImporter
         return true;
     }
 
-    private function _findLinkedItem($id)
+    private function _findLinkedItem($id, $collection_id)
     {
-        $record = get_db()->getTable('SharedShelfTransferRecord')->findBySharedShelfId((int)$id);
+        $record = get_db()->getTable('SharedShelfTransferRecord')->findBySharedShelfIdAndCollectionId((int)$id, (int)$collection_id);
         $item = get_db()->getTable('Item')->find($record->item_id);
         release_object($record);
         return $item;
@@ -122,16 +122,9 @@ class SharedShelfImporter
     private function _makeRecord($collection_id, $data, $files)
     {
         $collection = $this->_findCollection($collection_id);
-        error_log('_makeRecord called');
-        error_log(Zend_Json::encode($data));
-        error_log($collection_id);
-        error_log($collection->id);
-        error_log('done');
-        $itemMetadata = array('collection_id' => 3,
+        $itemMetadata = array('collection_id' => $collection->id,
             'public'        => true,
-            'featured'      => false,
-            'item_type_id'  => 6,
-            'tags' => 'SharedShelf');
+            'featured'      => false);
 
         $fileMetadata = array();
         $elementTexts = array();
