@@ -24,7 +24,7 @@ class SharedShelfImporter
             $id = $item->id;
             release_object($item); // Not sure if this is required.  Possible resource leak if not called.
             $item = $this->_updateItem($id, $record['elementTexts']);
-            $this->_updatePublicationDate($data['_ss_id'], $timestamp);
+            $this->_updatePublicationDate($data['_ss_id'], $data['_collection_id'], $timestamp);
         } else {
             $item = $this->insertItem($record['itemMetadata'], $record['elementTexts'], $record['fileMetadata']);
             $this->_recordPublication($data['_ss_id'], $data['_collection_id'], $item->id, $timestamp);
@@ -105,9 +105,9 @@ class SharedShelfImporter
         release_object($record);
     }
 
-    private function _updatePublicationDate($ss_id, $timestamp)
+    private function _updatePublicationDate($ss_id, $collection_id, $timestamp)
     {
-        $record = get_db()->getTable('SharedShelfTransferRecord')->findBySharedShelfId((int)$ss_id);
+        $record = get_db()->getTable('SharedShelfTransferRecord')->findBySharedShelfIdAndCollectionId((int)$ss_id, (int)$collection_id);
         $record->published = $timestamp;
         $record->save();
 
