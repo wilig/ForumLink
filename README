@@ -1,0 +1,9 @@
+An Omeka module for interfacing with ARTstor SharedShelf.
+
+This module enables Omeka to act as a SharedShelf publishing target.  To install the module just clone this repository into the Omeka plugins directory.
+
+Refreshing the Omeka administration interface should reveal a new plugin in the available plugin list.  Install the plugin, and input a new token that will be shared with SharedShelf.
+
+To complete the link you will need the URL of the Omeka installation, and the token.
+
+After configuration is complete, Omeka will appear as a publishing target inside SharedShelf.
