@@ -12,7 +12,7 @@
  * @package SharedShelfLink
  * @subpackage Models
  */
-class SharedShelfTransferRecord extends Omeka_Record
+class SharedShelfTransferRecord extends Omeka_Record_AbstractRecord
 {
     public $id;
     public $ss_id;

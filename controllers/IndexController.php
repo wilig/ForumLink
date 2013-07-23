@@ -13,7 +13,7 @@
  * @subpackage Controllers
  */
 
-class SharedShelfLink_IndexController extends Omeka_Controller_Action
+class SharedShelfLink_IndexController extends Omeka_Controller_AbstractActionController
 {
     /**
      * Show a list of recent transfers from Shared Shelf to Omeka.
@@ -22,7 +22,7 @@ class SharedShelfLink_IndexController extends Omeka_Controller_Action
      */
     public function indexAction()
     {
-        $transfers = $this->getTable('SharedShelfTransferRecord')->findAllTransfers();
+        $transfers = $this->_helper->db->getTable('SharedShelfTransferRecord')->findAllTransfers();
         $this->view->transfers = $transfers;
     }
 
