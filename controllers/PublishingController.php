@@ -31,7 +31,6 @@ class SharedShelfLink_PublishingController extends Omeka_Controller_AbstractActi
             new SharedShelfImporter();
             $publication = new SharedShelfImporter;
             $publication->createOrUpdateItem($_POST, $_FILES);
-            //$this->
             $this->_helper->json(array('success' => true));
         } else {
             $this->_helper->json(array('success' => false));

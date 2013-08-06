@@ -17,7 +17,6 @@ class SharedShelfImporter
 
     public function createOrUpdateItem($data, $files)
     {
-        echo $data;
         $json = Zend_Json::decode($data['data']);
         $record = $this->_makeRecord($data['_collection_id'], $json, $files);
         $timestamp = date_parse($data['_publication_date']);
