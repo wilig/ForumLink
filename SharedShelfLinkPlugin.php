@@ -78,23 +78,6 @@ class SharedShelfLinkPlugin extends Omeka_Plugin_AbstractPlugin
     }
 
     /**
-     * Upgrade the plugin.
-     *
-     * @param array $args contains: 'old_version' and 'new_version'
-     */
-    public function hookUpgrade($args)
-    {
-        $oldVersion = $args['old_version'];
-        $newVersion = $args['new_version'];
-        $db = $this->_db;
-
-        if ($oldVersion < '2.0') {
-            $db->query("ALTER TABLE `$db->SimplePagesPage` DROP `add_to_public_nav`");
-            delete_option('simple_pages_home_page_id');
-        }
-    }
-
-    /**
      * Define the ACL.
      *
      * @param Omeka_Acl
