@@ -78,6 +78,15 @@ class SharedShelfLinkPlugin extends Omeka_Plugin_AbstractPlugin
     }
 
     /**
+     * Upgrade the plugin.
+     *
+     * @param array $args contains: 'old_version' and 'new_version'
+     */
+    public function hookUpgrade($args)
+    {
+    }
+
+    /**
      * Define the ACL.
      *
      * @param Omeka_Acl
