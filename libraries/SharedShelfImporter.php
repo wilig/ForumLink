@@ -97,11 +97,10 @@ class SharedShelfImporter
     private function _recordPublication($ss_id, $collection_id, $item_id, $timestamp)
     {
         $record = new SharedShelfTransferRecord;
-        print_r($timestamp);
         $record->ss_id         = $ss_id;
         $record->collection_id = $collection_id;
         $record->item_id       = $item_id;
-        $record->published     = (string) $timestamp;
+        $record->published     = $timestamp;
         $record->save();
 
         release_object($record);
