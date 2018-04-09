@@ -19,7 +19,7 @@ class SharedShelfImporter
     {
         $json = Zend_Json::decode($data['data']);
         $record = $this->_makeRecord($data['_collection_id'], $json, $files);
-        $timestamp = date_parse($data['_publication_date']);
+        $timestamp = date("Y-m-d"); // $data['_publication_date'];
         if(($item = $this->_findLinkedItem($data['_ss_id'], $data['_collection_id']))) {
             $id = $item->id;
             release_object($item); // Not sure if this is required.  Possible resource leak if not called.
@@ -97,7 +97,7 @@ class SharedShelfImporter
     private function _recordPublication($ss_id, $collection_id, $item_id, $timestamp)
     {
         $record = new SharedShelfTransferRecord;
-
+        print_r($timestamp);
         $record->ss_id         = $ss_id;
         $record->collection_id = $collection_id;
         $record->item_id       = $item_id;
